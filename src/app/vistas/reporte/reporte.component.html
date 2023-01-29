@@ -1,0 +1,280 @@
+<app-header></app-header>
+<div class="container">
+  <h1>Informe Medico</h1>
+  <div class="row" *ngIf="btnPrinBool">
+    <div class="col">
+      <button type="button" class="btn btn-primary" (click)="nuevoInfBtn()">
+        Nuevo Informe
+      </button>
+    </div>
+    <div class="col">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="buscarInfBtn()"
+        *ngIf="buscarBtn"
+      >
+        Buscar Informe
+      </button>
+    </div>
+    <div class="input-group col" *ngIf="buscarBool">
+      <input
+        type="search"
+        class="form-control rounded"
+        placeholder="Search"
+        aria-label="Search"
+        aria-describedby="search-addon"
+      />
+      <button type="button" class="btn btn-outline-primary">search</button>
+    </div>
+  </div>
+
+  <form
+    *ngIf="reporteBool"
+    [formGroup]="formInforme"
+    (ngSubmit)="GuardarInforme(formInforme.value)"
+  >
+    <div class="mb-3 mt-3">
+      <label for="text" class="form-label">Paciente:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nombre del Paciente"
+        formControlName="nombre"
+      />
+    </div>
+    <div class="row">
+      <div class="col">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="DNI"
+          formControlName="dni"
+        />
+      </div>
+      <div class="col">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Edad"
+          formControlName="edad"
+        />
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <label for="">Fecha Nacimiento</label>
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Fecha Nacimiento"
+          formControlName="fechaNacimiento"
+        />
+      </div>
+      <div class="col">
+        <label for="">Genero</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Genero"
+          formControlName="genero"
+        />
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <label for="">Lugar de Nacimiento</label>
+        <select formControlName="lugarNacimiento" class="form-control">
+          <option value="laLibertad">LaLibertad</option>
+          <option value="lima">Lima</option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="">Lugar de Procedencia</label>
+        <select
+          name="select"
+          formControlName="lugarProcedencia"
+          class="form-control"
+        >
+          <option hidden Selected>Lugar de Procedencia</option>
+          <option value="trujillo">Trujillo</option>
+          <option value="otuzco">Otuzco</option>
+        </select>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Direccion"
+            formControlName="direccion"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Historia Clinica"
+          formControlName="historiaClinica"
+        />
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <label for="">Fecha de Ingreso</label>
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Fecha de Ingreso"
+          formControlName="fechaIngreso"
+        />
+      </div>
+      <div class="col">
+        <label for="">Fecha de Informe Medico</label>
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Fecha de Informe Medico"
+          formControlName="fechaInforme"
+        />
+      </div>
+    </div>
+    <br />
+
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Enfermedad Actual:</label>
+    </div>
+    <div class="row">
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Tiempo de Enfermedad"
+          formControlName="tiempoEnfermedad"
+        />
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Inicio"
+          formControlName="inicioEnfermedad"
+        />
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Curso"
+          formControlName="cursoEnfermedad"
+        />
+      </div>
+      <br />
+      <br />
+      <textarea
+        class="form-control"
+        rows="5"
+        id="comment"
+        name="text"
+        placeholder="Comentarios"
+        formControlName="comentarios"
+      ></textarea>
+    </div>
+    <br />
+
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Antecedentes</label>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="hospAnteriores"
+            formControlName="hospAnteriores"
+          />
+          <label class="form-check-label" for="hospAnteriores"
+            >Hospitalizaciones Anteriores</label
+          >
+        </div>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="transSangre"
+            formControlName="transSangre"
+          />
+          <label class="form-check-label" for="transSangre"
+            >Transfusiones Sanguineas</label
+          >
+        </div>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="quirurgico"
+            formControlName="quirurgico"
+          />
+          <label class="form-check-label" for="quirurgico">Quirurgicos</label>
+        </div>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="tabaquismo"
+            formControlName="tabaquismo"
+          />
+          <label class="form-check-label" for="tabaquismo">Tabaquismo</label>
+        </div>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="alcoholismo"
+            formControlName="alcoholismo"
+          />
+          <label class="form-check-label" for="alcoholismo">Alcoholismo</label>
+        </div>
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="biomasa"
+            formControlName="biomasa"
+          />
+          <label class="form-check-label" for="biomasa">Biomasa</label>
+        </div>
+      </div>
+      <div class="col">
+        <textarea
+          class="form-control"
+          rows="5"
+          id="comment"
+          name="text"
+          placeholder="Examen Fisico"
+          formControlName="examenFisico"
+        ></textarea>
+      </div>
+      <div class="col">
+        <textarea
+          class="form-control"
+          rows="5"
+          id="comment"
+          name="text"
+          placeholder="Evolucion"
+          formControlName="evolucion"
+        ></textarea>
+      </div>
+    </div>
+    <br /><br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
